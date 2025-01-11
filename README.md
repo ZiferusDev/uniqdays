@@ -9,7 +9,7 @@
 - Архитектура: FSD
 - Улучшение кода: Prettier, Eslint, Stylelint, Sonarlint, Eslint/fsd-plugin
 
-> # auth: Ziferus
+> ### author: Ziferus
 >
 > Кривцов Игорь
 > 2025
