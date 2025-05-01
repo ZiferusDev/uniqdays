@@ -23,6 +23,20 @@ export default tseslint.config(
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
     },
+    overrides: [
+      {
+        files: ['**/*.{app,entity,feature,model,widgets}.*'],
+        settings: {
+          'import/resolver': {
+            node: {
+              paths: {
+                '@': ['src'],
+              },
+            },
+          },
+        },
+      },
+    ],
     rules: {
       ...reactHooks.configs.recommended.rules,
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],

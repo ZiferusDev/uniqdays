@@ -6,12 +6,19 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "composite": true,
 
     "baseUrl": ".",
     "paths": {
-      "*": ["./src/*"]
+      "@app": ["./src/app"],
+      "@entities": ["./src/entities"],
+      "@features": ["./src/features"],
+      "@shared": ["./src/shared"],
+      "@widgets": ["./src/widgets"],
+      "@entities/*": ["./src/entities/*"],
+      "@shared/*": ["./src/shared/*"]
     },
-    "types": ["react"],
+    "types": ["react", "vite/client"],
 
     /* Bundler mode */
     "moduleResolution": "bundler",
