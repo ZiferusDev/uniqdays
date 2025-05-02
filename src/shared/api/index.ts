@@ -1,2 +1,2 @@
 export { baseQuery } from './baseQuery';
-export { db, auth } from './firebase';
+export { db, auth, googleProvider } from './firebase';

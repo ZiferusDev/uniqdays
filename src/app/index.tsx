@@ -1,2 +1,2 @@
-export { App } from './App';
+export { App } from './ui';
 export { Providers } from './providers';

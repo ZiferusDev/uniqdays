@@ -1,18 +1,25 @@
 import { Suspense } from 'react';
 import { Route, RouteProps, Routes } from 'react-router-dom';
 
-import { Dashboard } from 'pages/Dashboard';
+import { AuthPage, Dashboard } from '@pages';
+import { SafeRoute } from './SafeRoute';
 
-type AppRoutes = 'main';
+type AppRoutes = 'home' | 'auth';
 
 const RoutePath: Record<AppRoutes, string> = {
-  main: '/',
+  home: '/',
+  auth: '/auth',
 };
 
-const config: Record<AppRoutes, RouteProps> = {
-  main: {
-    path: RoutePath.main,
+const config: Record<AppRoutes, RouteProps & { needsAuth?: boolean }> = {
+  home: {
+    path: RoutePath.home,
     element: <Dashboard />,
+    needsAuth: true,
+  },
+  auth: {
+    path: RoutePath.auth,
+    element: <AuthPage />,
   },
 };
 
@@ -20,9 +27,15 @@ export const AppRouter = () => {
   return (
     <Suspense fallback={'Ждите'}>
       <Routes>
-        {Object.values(config).map(({ path, element }) => (
-          <Route key={path} path={path} element={element} />
-        ))}
+        {Object.values(config).map(({ path, element, needsAuth }) =>
+          needsAuth ? (
+            <Route key={'safeRoute'} path={path} element={<SafeRoute />}>
+              <Route key={path} path={path} element={element} />
+            </Route>
+          ) : (
+            <Route key={path} path={path} element={element} />
+          )
+        )}
       </Routes>
     </Suspense>
   );
