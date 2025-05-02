@@ -1,5 +1,3 @@
-import { fetchBaseQuery } from '@reduxjs/toolkit/query';
+import { fakeBaseQuery } from '@reduxjs/toolkit/query/react';
 
-export const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://jsonplaceholder.typicode.com',
-});
+export const baseQuery = fakeBaseQuery();
