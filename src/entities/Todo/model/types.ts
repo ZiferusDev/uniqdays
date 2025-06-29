@@ -1,5 +1,7 @@
 export type TTask = {
-  title: string;
+  id: string;
+  dateOfCompleting: number;
   description: string;
-  dateOfCompeting: Date;
+  done: boolean;
+  title: string;
 };

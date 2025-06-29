@@ -10,7 +10,7 @@ export const LogoutBttn = () => {
   };
   return (
     <button
-      className="bg-[orange] cursor-pointer rounded-[4px] border-none p-[8px]"
+      className="bg-[orange] cursor-pointer rounded-[4px] border-none p-[8px] w-20"
       onClick={onLogout}
     >
       Logout
