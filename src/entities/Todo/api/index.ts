@@ -1,1 +1,6 @@
-export { todosApi, useGetTasksQuery } from './todosApi';
+export {
+  todosApi,
+  useGetTasksQuery,
+  useDeleteTaskByIdMutation,
+  useAddTaskMutation,
+} from './todosApi';

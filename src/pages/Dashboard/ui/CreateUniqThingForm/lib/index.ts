@@ -1,5 +1,5 @@
 export {
   safeFormDataStringValue,
-  safeFormDataBooleanValue,
+  safeFormDataCheckboxValue,
   safeFormDataDateValue,
 } from './transformers';
