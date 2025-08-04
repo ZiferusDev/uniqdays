@@ -22,8 +22,6 @@ export const UniqThingCard = ({
 }: TUniqThingCardProps) => {
   const [isDeleteThingPopoverOpened, setIsDeleteThingPopoverOpened] = useState(false);
 
-  console.log(dateOfCompleting);
-
   const [deleteTaskById, { isSuccess, isError }] = useDeleteTaskByIdMutation();
 
   const { showToast } = useToast();
@@ -112,7 +110,13 @@ export const UniqThingCard = ({
       ) : (
         <span className="text-amber-500 font-bold">🕒 Ожидает</span>
       )}
-      {description ? `Описание: ${description}` : ''}
+      {description ? (
+        <p>
+          <span className="italic">{description}</span>
+        </p>
+      ) : (
+        ''
+      )}
       {tags?.map((tag) => (
         <TagBlock key={tag}>{tag}</TagBlock>
       ))}

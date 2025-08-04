@@ -25,6 +25,8 @@ export const Popover: React.FC<TPopoverProps> = ({
     }
   };
 
+  const onTogglePopover = () => changeOpenState(!isOpen);
+
   // Закрытие по клику вне поповера и триггера
   useEffect(() => {
     if (!isOpen) return;
@@ -50,14 +52,14 @@ export const Popover: React.FC<TPopoverProps> = ({
 
   return (
     <div className="inline-block relative" ref={triggerRef}>
-      <div onClick={() => changeOpenState(!isOpen)} style={{ cursor: 'pointer' }}>
+      <button onClick={onTogglePopover} className="cursor-pointer outline-0 border-0">
         {children}
-      </div>
+      </button>
 
       {isOpen && (
         <div
           ref={popoverRef}
-          className={`absolute z-50 bg-gray-700 text-amber-50 border shadow-lg rounded p-4 ${popoverPositionClass}`}
+          className={`absolute z-50 bg-gray-700 text-amber-50 shadow-lg rounded p-4 border-0 outline-0 ${popoverPositionClass}`}
           style={{ minWidth: 200 }}
           aria-modal="true"
         >

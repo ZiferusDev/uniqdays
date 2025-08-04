@@ -1,67 +1,79 @@
-import { useAddTaskMutation } from '@entities';
-import { FormEvent, useEffect } from 'react';
-import { safeFormDataCheckboxValue, safeFormDataDateValue, safeFormDataStringValue } from '../lib';
-import { useToast } from '@shared';
+import { DatePicker, Input, Button } from '@shared';
+import { HelpingPanel } from './HelpingPanel';
+import { useCreateUniqThingForm } from '../lib';
 
 export const CreateUniqThingForm = () => {
-  const [addTask, { isError, isSuccess }] = useAddTaskMutation();
-
-  const { showToast } = useToast();
-
-  const onCreateUniqThing = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-
-    const taskTitle = formData.get('title');
-
-    if (typeof taskTitle === 'string') {
-      await addTask({
-        id: 'auto',
-        title: taskTitle,
-        dateOfCompleting: safeFormDataDateValue(formData, 'dateOfCompleting'),
-        description: safeFormDataStringValue(formData, 'description'),
-        done: safeFormDataCheckboxValue(formData, 'isDone'),
-      });
-    }
-  };
-
-  useEffect(() => {
-    if (isError) {
-      showToast({
-        type: 'error',
-        title: 'Возникла ошибка',
-      });
-    } else if (isSuccess) {
-      showToast({
-        type: 'success',
-        title: 'Создано уникальное действие',
-      });
-    }
-  }, [isError, isSuccess]);
+  const {
+    isThingDoneByDefault,
+    toggleIsThingDoneByDefault,
+    formRef,
+    onSubmit,
+    isLoading,
+    isThingDone,
+    toggleIsThingDone,
+    onResetForm,
+    yearByDefault,
+    onChangeYearByDefault,
+  } = useCreateUniqThingForm();
 
   return (
-    <form
-      onSubmit={onCreateUniqThing}
-      className="max-w-90 flex flex-col items-center justify-center-safe bg-amber-200 rounded-2xl p-4 gap-2"
-    >
-      <input id="title" name="title" type="text" placeholder="Название действия" required />
-      <input id="description" name="description" placeholder="Описание действия" />
-      <input
-        id="dateOfCompleting"
-        name="dateOfCompleting"
-        placeholder="Дата завершения"
-        type="date"
+    <div className="flex flex-col items-start">
+      <HelpingPanel
+        isThingDoneByDefault={isThingDoneByDefault}
+        toggleIsThingDoneByDefault={toggleIsThingDoneByDefault}
+        onResetForm={onResetForm}
       />
-      <label className="flex gap-1 select-none cursor-pointer">
-        <span>Завершена</span>
-        <input id="isDone" name="isDone" type="checkbox" />
-      </label>
-      <button
-        className="bg-amber-500 rounded-3xl w-40 cursor-pointer hover:bg-amber-600"
-        type="submit"
+      <form
+        ref={formRef}
+        onSubmit={onSubmit}
+        className="max-w-70 flex flex-col items-center justify-center bg-indigo-100 rounded-2xl p-8 gap-2"
       >
-        Отправить
-      </button>
-    </form>
+        <h3 className="font-bold">Создать уникальное действие</h3>
+        <Input
+          id="title"
+          name="title"
+          type="text"
+          labelText="Название"
+          placeholder="Название действия"
+          stretched
+          required
+        />
+        <Input
+          id="description"
+          name="description"
+          labelText="Описание"
+          placeholder="Описание действия"
+          stretched
+        />
+        <Input
+          labelText="Год по дефолту"
+          value={yearByDefault}
+          onChange={onChangeYearByDefault}
+          type="number"
+          stretched
+        />
+        <DatePicker
+          id="dateOfCompleting"
+          name="dateOfCompleting"
+          labelText="Дата завершения"
+          certainYear={yearByDefault || undefined}
+        />
+        <label className="flex gap-1 select-none cursor-pointer items-center justify-center">
+          <input
+            id="isDone"
+            checked={isThingDone}
+            onChange={toggleIsThingDone}
+            className="cursor-pointer"
+            defaultChecked={isThingDoneByDefault}
+            name="isDone"
+            type="checkbox"
+          />
+          <span>Завершена</span>
+        </label>
+        <Button type="submit" isLoading={isLoading}>
+          Отправить
+        </Button>
+      </form>
+    </div>
   );
 };
