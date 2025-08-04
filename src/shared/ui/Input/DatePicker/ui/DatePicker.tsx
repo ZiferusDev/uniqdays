@@ -1,20 +1,15 @@
-import { Input } from '../../ui';
+import { Input, TInputProps } from '../../ui';
 
-type TDatePickerProps = {
-  id?: string;
-  name?: string;
-  labelText?: string;
-  min?: string;
-  max?: string;
+type TDatePickerProps = Omit<TInputProps, 'type'> & {
   certainYear?: number;
 };
 
-export const DatePicker = ({ id, name, labelText, min, max, certainYear }: TDatePickerProps) => {
+export const DatePicker = ({ min, max, certainYear, ...restProps }: TDatePickerProps) => {
   const defaultMin = `${new Date().getFullYear() - 50}-01-01`;
   const defaultMax = `${new Date().getFullYear()}-12-31`;
 
-  let minDate = defaultMin;
-  let maxDate = defaultMax;
+  let minDate: string | number = defaultMin;
+  let maxDate: string | number = defaultMax;
 
   if (certainYear) {
     minDate = `${certainYear}-01-01`;
@@ -36,15 +31,5 @@ export const DatePicker = ({ id, name, labelText, min, max, certainYear }: TDate
     }
   }
 
-  return (
-    <Input
-      id={id}
-      name={name}
-      labelText={labelText}
-      type="date"
-      stretched
-      min={minDate}
-      max={maxDate}
-    />
-  );
+  return <Input type="date" min={minDate} max={maxDate} {...restProps} />;
 };

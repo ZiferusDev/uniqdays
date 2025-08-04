@@ -14,6 +14,8 @@ export const CreateUniqThingForm = () => {
     onResetForm,
     yearByDefault,
     onChangeYearByDefault,
+    dateOfCompleting,
+    onChangeDateOfCompleting,
   } = useCreateUniqThingForm();
 
   return (
@@ -57,6 +59,9 @@ export const CreateUniqThingForm = () => {
           name="dateOfCompleting"
           labelText="Дата завершения"
           certainYear={yearByDefault || undefined}
+          value={dateOfCompleting}
+          onChange={onChangeDateOfCompleting}
+          stretched
         />
         <label className="flex gap-1 select-none cursor-pointer items-center justify-center">
           <input

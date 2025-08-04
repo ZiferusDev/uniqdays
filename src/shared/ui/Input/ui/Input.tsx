@@ -1,6 +1,6 @@
 import { InputHTMLAttributes } from 'react';
 
-type TInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'className'> & {
+export type TInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'className'> & {
   labelText?: string;
   stretched?: boolean;
 };

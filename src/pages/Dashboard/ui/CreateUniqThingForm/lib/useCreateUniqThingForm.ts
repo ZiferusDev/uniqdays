@@ -8,9 +8,10 @@ import {
 } from './transformers';
 
 export const useCreateUniqThingForm = () => {
-  const [addTask, { isError, isSuccess, isLoading }] = useAddTaskMutation();
+  const [addTask, { isError, isSuccess, isLoading, error }] = useAddTaskMutation();
   const [isThingDoneByDefault, setIsThingDoneByDefault] = useState(false);
   const [isThingDone, setIsThingDone] = useState(isThingDoneByDefault);
+  const [dateOfCompleting, setDateOfCompleting] = useState<string>('');
   const [yearByDefault, setYearByDefault] = useState<number | ''>();
 
   const formRef = useRef<HTMLFormElement>(null);
@@ -27,8 +28,14 @@ export const useCreateUniqThingForm = () => {
   const onIsThingDone = () => setIsThingDone(true);
   const onIsThingNotDone = () => setIsThingDone(false);
 
-  const onChangeYearByDefault = (e: ChangeEvent<HTMLInputElement>) =>
+  const onChangeDateOfCompleting = (e: ChangeEvent<HTMLInputElement>) => {
+    setDateOfCompleting(e.target.value);
+  };
+
+  const onChangeYearByDefault = (e: ChangeEvent<HTMLInputElement>) => {
     setYearByDefault(Number(e.target.value));
+    setDateOfCompleting('');
+  };
 
   const onCreateUniqThing = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -63,11 +70,13 @@ export const useCreateUniqThingForm = () => {
       } else {
         onIsThingDone();
       }
+
+      setDateOfCompleting('');
     }
   };
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    onCreateUniqThing(e).then(() => onResetForm());
+    onCreateUniqThing(e);
   };
 
   useEffect(() => {
@@ -78,15 +87,18 @@ export const useCreateUniqThingForm = () => {
 
   useEffect(() => {
     if (isError) {
+      const isUniqueError = error.message?.match('not unique');
       showToast({
         type: 'error',
         title: 'Возникла ошибка',
+        description: isUniqueError ? 'Такое уникальное действие уже существует' : undefined,
       });
     } else if (isSuccess) {
       showToast({
         type: 'success',
         title: 'Создано уникальное действие',
       });
+      onResetForm();
     }
   }, [isError, isSuccess]);
 
@@ -97,6 +109,8 @@ export const useCreateUniqThingForm = () => {
     isThingDone,
     toggleIsThingDone,
     toggleIsThingDoneByDefault,
+    dateOfCompleting,
+    onChangeDateOfCompleting,
     onSubmit,
     onIsThingDone,
     onIsThingNotDone,

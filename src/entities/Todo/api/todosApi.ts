@@ -1,7 +1,16 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { db, baseQuery } from '@shared/api';
-import { addDoc, collection, getDocs, deleteDoc, serverTimestamp, doc } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  getDocs,
+  deleteDoc,
+  serverTimestamp,
+  doc,
+  query,
+  where,
+} from 'firebase/firestore';
 import { TTask } from '../model';
 
 const tasksCollectionRef = collection(db, 'tasks');
@@ -20,15 +29,25 @@ export const todosApi = createApi({
           const tasksData = data.docs.map((doc) => ({ ...(doc.data() as TTask), id: doc.id }));
           return { data: tasksData };
         } catch (error) {
-          return { error };
+          return typeof error === 'string'
+            ? { error: new Error(error) }
+            : { error: new Error('Ошибка при получении действий') };
         }
       },
       providesTags: ['UniqThings'],
     }),
     addTask: build.mutation<TTaskCreate, TTaskCreate>({
       queryFn: async (data) => {
+        const tasksCollection = collection(db, 'tasks');
         try {
-          await addDoc(collection(db, 'tasks'), {
+          const tasksWithSameName = query(tasksCollection, where('title', '==', data.title));
+          const snapshot = await getDocs(tasksWithSameName);
+
+          if (!snapshot.empty) {
+            throw new Error('title is not unique');
+          }
+
+          await addDoc(tasksCollection, {
             ...data,
             timestamp: serverTimestamp(),
           });
@@ -39,7 +58,9 @@ export const todosApi = createApi({
             },
           };
         } catch (error) {
-          return { error };
+          return typeof error === 'string'
+            ? { error: new Error(error) }
+            : { error: new Error('Ошибка при создании действия') };
         }
       },
       invalidatesTags: ['UniqThings'],
@@ -52,7 +73,9 @@ export const todosApi = createApi({
           return { data: undefined };
           // weird
         } catch (error) {
-          return { error };
+          return typeof error === 'string'
+            ? { error: new Error(error) }
+            : { error: new Error('Ошибка при удалении действия') };
         }
       },
       invalidatesTags: ['UniqThings'],
