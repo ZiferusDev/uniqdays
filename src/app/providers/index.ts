@@ -1,1 +1,1 @@
-export { Providers } from './ui';
+export { Providers } from './ui'

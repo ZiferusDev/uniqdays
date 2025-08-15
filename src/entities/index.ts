@@ -1,2 +1,2 @@
-export { TodoCard } from './Todo';
-export { useGetTasksQuery, useDeleteTaskByIdMutation, useAddTaskMutation } from './Todo';
+export { TodoCard } from './Todo'
+export { useGetTasksQuery, useDeleteTaskByIdMutation, useAddTaskMutation } from './Todo'

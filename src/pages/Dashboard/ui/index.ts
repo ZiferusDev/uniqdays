@@ -1,2 +1,2 @@
-export { CreateUniqThingForm } from './CreateUniqThingForm';
-export { Dashboard } from './Dashboard';
+export { CreateUniqThingForm } from './CreateUniqThingForm'
+export { Dashboard } from './Dashboard'

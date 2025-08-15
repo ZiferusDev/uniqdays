@@ -1,6 +1,7 @@
-import { DatePicker, Input, Button } from '@shared';
-import { HelpingPanel } from './HelpingPanel';
-import { useCreateUniqThingForm } from '../lib';
+import { DatePicker, Input, Button } from '@shared'
+
+import { useCreateUniqThingForm } from '../lib'
+import { HelpingPanel } from './HelpingPanel'
 
 export const CreateUniqThingForm = () => {
   const {
@@ -16,7 +17,7 @@ export const CreateUniqThingForm = () => {
     onChangeYearByDefault,
     dateOfCompleting,
     onChangeDateOfCompleting,
-  } = useCreateUniqThingForm();
+  } = useCreateUniqThingForm()
 
   return (
     <div className="flex flex-col items-start">
@@ -80,5 +81,5 @@ export const CreateUniqThingForm = () => {
         </Button>
       </form>
     </div>
-  );
-};
+  )
+}

@@ -1,15 +1,18 @@
-import { Suspense } from 'react';
-import { Route, RouteProps, Routes } from 'react-router-dom';
+import { Suspense } from 'react'
 
-import { AuthPage, Dashboard } from '@pages';
-import { SafeRoute } from './SafeRoute';
+import type { RouteProps } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 
-type AppRoutes = 'home' | 'auth';
+import { AuthPage, Dashboard } from '@pages'
+
+import { SafeRoute } from './SafeRoute'
+
+type AppRoutes = 'home' | 'auth'
 
 const RoutePath: Record<AppRoutes, string> = {
   home: '/',
   auth: '/auth',
-};
+}
 
 const config: Record<AppRoutes, RouteProps & { needsAuth?: boolean }> = {
   home: {
@@ -21,7 +24,7 @@ const config: Record<AppRoutes, RouteProps & { needsAuth?: boolean }> = {
     path: RoutePath.auth,
     element: <AuthPage />,
   },
-};
+}
 
 export const AppRouter = () => {
   return (
@@ -38,5 +41,5 @@ export const AppRouter = () => {
         )}
       </Routes>
     </Suspense>
-  );
-};
+  )
+}

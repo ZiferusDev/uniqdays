@@ -1,16 +1,18 @@
-import { Popover, Tooltip, useToast } from '@shared';
-import { TagBlock } from './TagBlock';
-import { useEffect, useState } from 'react';
-import { useDeleteTaskByIdMutation } from '@entities';
+import { useEffect, useState } from 'react'
+
+import { useDeleteTaskByIdMutation } from '@entities'
+import { Popover, Tooltip, useToast } from '@shared'
+
+import { TagBlock } from './TagBlock'
 
 type TUniqThingCardProps = {
-  id: string;
-  name: string;
-  description?: string;
-  isDone?: boolean;
-  dateOfCompleting?: number;
-  tags?: string[];
-};
+  id: string
+  name: string
+  description?: string
+  isDone?: boolean
+  dateOfCompleting?: number
+  tags?: string[]
+}
 
 export const UniqThingCard = ({
   id,
@@ -20,34 +22,34 @@ export const UniqThingCard = ({
   dateOfCompleting,
   tags,
 }: TUniqThingCardProps) => {
-  const [isDeleteThingPopoverOpened, setIsDeleteThingPopoverOpened] = useState(false);
+  const [isDeleteThingPopoverOpened, setIsDeleteThingPopoverOpened] = useState(false)
 
-  const [deleteTaskById, { isSuccess, isError }] = useDeleteTaskByIdMutation();
+  const [deleteTaskById, { isSuccess, isError }] = useDeleteTaskByIdMutation()
 
-  const { showToast } = useToast();
+  const { showToast } = useToast()
 
-  const onOpenDeleteThingPopover = () => setIsDeleteThingPopoverOpened(true);
-  const onCloseDeleteThingPopover = () => setIsDeleteThingPopoverOpened(false);
+  const onOpenDeleteThingPopover = () => setIsDeleteThingPopoverOpened(true)
+  const onCloseDeleteThingPopover = () => setIsDeleteThingPopoverOpened(false)
 
   const onDeleteThing = async () => {
-    onCloseDeleteThingPopover();
-    await deleteTaskById(id);
-  };
+    onCloseDeleteThingPopover()
+    await deleteTaskById(id)
+  }
 
   useEffect(() => {
     if (isError) {
       showToast({
         type: 'error',
         title: 'Возникла ошибка',
-      });
+      })
     } else if (isSuccess) {
       showToast({
         type: 'success',
         title: 'Удалено событие',
         description: name,
-      });
+      })
     }
-  }, [isSuccess, isError]);
+  }, [isSuccess, isError, name, showToast])
 
   return (
     <div className="flex flex-col border-2 border-gray-300 rounded-2xl p-5 w-2xs relative">
@@ -121,5 +123,5 @@ export const UniqThingCard = ({
         <TagBlock key={tag}>{tag}</TagBlock>
       ))}
     </div>
-  );
-};
+  )
+}

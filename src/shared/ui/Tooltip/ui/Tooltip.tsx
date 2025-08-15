@@ -1,7 +1,7 @@
-import { positionClasses, type TTooltipProps } from '../model';
+import { positionClasses, type TTooltipProps } from '../model'
 
 export const Tooltip = ({ text, position = 'top', children }: TTooltipProps) => {
-  const tooltipPositionClass = positionClasses[position];
+  const tooltipPositionClass = positionClasses[position]
   return (
     <div className="relative inline-flex max-w-full">
       {children}
@@ -13,5 +13,5 @@ export const Tooltip = ({ text, position = 'top', children }: TTooltipProps) => 
         {text}
       </span>
     </div>
-  );
-};
+  )
+}

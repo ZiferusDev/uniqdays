@@ -1,8 +1,8 @@
-import { PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react'
 
-export type TTooltipPosition = 'left' | 'top' | 'right' | 'bottom';
+export type TTooltipPosition = 'left' | 'top' | 'right' | 'bottom'
 
 export type TTooltipProps = PropsWithChildren<{
-  text: string;
-  position?: TTooltipPosition;
-}>;
+  text: string
+  position?: TTooltipPosition
+}>

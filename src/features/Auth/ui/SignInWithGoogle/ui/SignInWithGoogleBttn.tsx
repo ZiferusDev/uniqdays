@@ -1,18 +1,21 @@
-import { signInWithPopup } from 'firebase/auth';
-import { auth, googleProvider } from '@shared/api';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
+
+import { signInWithPopup } from 'firebase/auth'
+
+import { auth, googleProvider } from '@shared/api'
+
 export const SignInWithGoogleBttn = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const onSignInWithGoogle = async () => {
     try {
-      await signInWithPopup(auth, googleProvider);
+      await signInWithPopup(auth, googleProvider)
       if (auth.currentUser) {
-        navigate('/');
+        navigate('/')
       }
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
-  };
+  }
 
   return (
     <button
@@ -21,5 +24,5 @@ export const SignInWithGoogleBttn = () => {
     >
       Sign in with Google
     </button>
-  );
-};
+  )
+}

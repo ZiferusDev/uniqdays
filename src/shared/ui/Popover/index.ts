@@ -1,1 +1,1 @@
-export { Popover } from './ui';
+export { Popover } from './ui'

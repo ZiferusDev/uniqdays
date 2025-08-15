@@ -1,27 +1,30 @@
-import { SignInWithGoogleBttn, LogoutBttn } from '@features';
-import { Spinner } from '@shared';
-import { auth } from '@shared/api';
-import { onAuthStateChanged } from 'firebase/auth';
-import { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useEffect, useState } from 'react'
+
+import { Navigate } from 'react-router-dom'
+
+import { onAuthStateChanged } from 'firebase/auth'
+
+import { SignInWithGoogleBttn, LogoutBttn } from '@features'
+import { LoadingScreen } from '@shared'
+import { auth } from '@shared/api'
 
 export const AuthPage = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean | 'loading'>('loading');
-  console.log('auth');
-  console.log(isAuthenticated);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | 'loading'>('loading')
+  console.warn('auth')
+  console.warn(isAuthenticated)
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        setIsAuthenticated(true);
+        setIsAuthenticated(true)
       } else {
-        setIsAuthenticated(false);
+        setIsAuthenticated(false)
       }
-    });
-  }, [auth]);
+    })
+  }, [auth])
 
   if (isAuthenticated === 'loading') {
-    return <Spinner />;
+    return <LoadingScreen />
   }
 
   return isAuthenticated ? (
@@ -35,5 +38,5 @@ export const AuthPage = () => {
         <LogoutBttn />
       </div>
     </div>
-  );
-};
+  )
+}

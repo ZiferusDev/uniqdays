@@ -1,6 +1,3 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
-
-import { db, baseQuery } from '@shared/api';
 import {
   addDoc,
   collection,
@@ -10,12 +7,16 @@ import {
   doc,
   query,
   where,
-} from 'firebase/firestore';
-import { TTask } from '../model';
+} from 'firebase/firestore'
 
-const tasksCollectionRef = collection(db, 'tasks');
+import { createApi } from '@reduxjs/toolkit/query/react'
+import { db, baseQuery } from '@shared/api'
 
-type TTaskCreate = Omit<TTask, 'dateOfCompleting'> & { dateOfCompleting: number };
+import type { TTask } from '../model'
+
+const tasksCollectionRef = collection(db, 'tasks')
+
+type TTaskCreate = Omit<TTask, 'dateOfCompleting'> & { dateOfCompleting: number }
 
 export const todosApi = createApi({
   baseQuery,
@@ -25,62 +26,70 @@ export const todosApi = createApi({
     getTasks: build.query<TTask[], void>({
       queryFn: async () => {
         try {
-          const data = await getDocs(tasksCollectionRef);
-          const tasksData = data.docs.map((doc) => ({ ...(doc.data() as TTask), id: doc.id }));
-          return { data: tasksData };
+          const data = await getDocs(tasksCollectionRef)
+          const tasksData = data.docs.map((doc) => ({ ...(doc.data() as TTask), id: doc.id }))
+          return { data: tasksData }
         } catch (error) {
           return typeof error === 'string'
             ? { error: new Error(error) }
-            : { error: new Error('Ошибка при получении действий') };
+            : { error: new Error('Ошибка при получении действий') }
         }
       },
       providesTags: ['UniqThings'],
     }),
     addTask: build.mutation<TTaskCreate, TTaskCreate>({
       queryFn: async (data) => {
-        const tasksCollection = collection(db, 'tasks');
+        const tasksCollection = collection(db, 'tasks')
         try {
-          const tasksWithSameName = query(tasksCollection, where('title', '==', data.title));
-          const snapshot = await getDocs(tasksWithSameName);
+          const tasksWithSameName = query(tasksCollection, where('title', '==', data.title))
+          const snapshot = await getDocs(tasksWithSameName)
 
           if (!snapshot.empty) {
-            throw new Error('title is not unique');
+            throw new Error('title is not unique')
           }
 
           await addDoc(tasksCollection, {
             ...data,
             timestamp: serverTimestamp(),
-          });
+          })
           // weird
           return {
             data: {
               ...data,
             },
-          };
+          }
         } catch (error) {
-          return typeof error === 'string'
-            ? { error: new Error(error) }
-            : { error: new Error('Ошибка при создании действия') };
+          if (error) {
+            if (typeof error === 'string') return { error: new Error(error) }
+            if (
+              typeof error === 'object' &&
+              'message' in error &&
+              typeof error.message === 'string'
+            ) {
+              return { error: new Error(error.message) }
+            }
+          }
+          return { error: new Error('Ошибка при создании действия') }
         }
       },
       invalidatesTags: ['UniqThings'],
     }),
     deleteTaskById: build.mutation<void, string>({
       queryFn: async (taskId) => {
-        const taskDoc = doc(db, 'tasks', taskId);
+        const taskDoc = doc(db, 'tasks', taskId)
         try {
-          await deleteDoc(taskDoc);
-          return { data: undefined };
+          await deleteDoc(taskDoc)
+          return { data: undefined }
           // weird
         } catch (error) {
           return typeof error === 'string'
             ? { error: new Error(error) }
-            : { error: new Error('Ошибка при удалении действия') };
+            : { error: new Error('Ошибка при удалении действия') }
         }
       },
       invalidatesTags: ['UniqThings'],
     }),
   }),
-});
+})
 
-export const { useGetTasksQuery, useAddTaskMutation, useDeleteTaskByIdMutation } = todosApi;
+export const { useGetTasksQuery, useAddTaskMutation, useDeleteTaskByIdMutation } = todosApi

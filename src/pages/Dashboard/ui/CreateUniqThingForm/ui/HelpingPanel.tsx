@@ -1,8 +1,8 @@
 type THelpingPanelProps = {
-  isThingDoneByDefault: boolean;
-  toggleIsThingDoneByDefault: () => void;
-  onResetForm: () => void;
-};
+  isThingDoneByDefault: boolean
+  toggleIsThingDoneByDefault: () => void
+  onResetForm: () => void
+}
 
 export const HelpingPanel = ({
   isThingDoneByDefault,
@@ -27,5 +27,5 @@ export const HelpingPanel = ({
         Очистить
       </button>
     </div>
-  );
-};
+  )
+}

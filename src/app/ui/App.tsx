@@ -1,6 +1,7 @@
-import './tailwind.css';
-import { AppRouter } from '../routers/AppRouter';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify'
+
+import { AppRouter } from '../routers/AppRouter'
+import './tailwind.css'
 
 export const App = () => {
   return (
@@ -18,5 +19,5 @@ export const App = () => {
         theme="dark"
       />
     </>
-  );
-};
+  )
+}

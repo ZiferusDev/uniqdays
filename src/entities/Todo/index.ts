@@ -1,2 +1,2 @@
-export { todosApi, useGetTasksQuery, useDeleteTaskByIdMutation, useAddTaskMutation } from './api';
-export { TodoCard } from './ui';
+export { todosApi, useGetTasksQuery, useDeleteTaskByIdMutation, useAddTaskMutation } from './api'
+export { TodoCard } from './ui'

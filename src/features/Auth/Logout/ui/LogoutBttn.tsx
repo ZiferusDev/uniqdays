@@ -1,9 +1,10 @@
-import { auth } from '@shared/api';
-import { signOut } from 'firebase/auth';
+import { signOut } from 'firebase/auth'
+
+import { auth } from '@shared/api'
 
 export const LogoutBttn = () => {
   const onLogout = () => {
-    signOut(auth);
-  };
-  return <button onClick={onLogout}>Logout</button>;
-};
+    signOut(auth)
+  }
+  return <button onClick={onLogout}>Logout</button>
+}

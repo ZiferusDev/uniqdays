@@ -1,1 +1,1 @@
-export { CreateUniqThingForm } from './CreateUniqThingForm';
+export { CreateUniqThingForm } from './CreateUniqThingForm'

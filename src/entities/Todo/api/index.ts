@@ -3,4 +3,4 @@ export {
   useGetTasksQuery,
   useDeleteTaskByIdMutation,
   useAddTaskMutation,
-} from './todosApi';
+} from './todosApi'

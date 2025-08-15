@@ -1,3 +1,3 @@
-import { fakeBaseQuery } from '@reduxjs/toolkit/query/react';
+import { fakeBaseQuery } from '@reduxjs/toolkit/query/react'
 
-export const baseQuery = fakeBaseQuery<Error>();
+export const baseQuery = fakeBaseQuery<Error>()

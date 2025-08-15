@@ -1,1 +1,1 @@
-export { UniqThingCard } from './UniqThingCard';
+export { UniqThingCard } from './UniqThingCard'

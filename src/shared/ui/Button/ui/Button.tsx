@@ -1,8 +1,8 @@
-import { Spinner } from '@shared/ui/Spinner';
+import { Spinner } from '@shared/ui/Spinner'
 
 type TButtonProps = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'className'> & {
-  isLoading?: boolean;
-};
+  isLoading?: boolean
+}
 
 export const Button = ({ children, isLoading = false, ...props }: TButtonProps) => {
   return (
@@ -13,5 +13,5 @@ export const Button = ({ children, isLoading = false, ...props }: TButtonProps) 
     >
       {isLoading ? <Spinner size="s" /> : children}
     </button>
-  );
-};
+  )
+}

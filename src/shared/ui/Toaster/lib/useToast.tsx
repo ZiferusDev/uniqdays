@@ -1,14 +1,14 @@
-import { toast, type ToastOptions } from 'react-toastify';
+import { toast, type ToastOptions } from 'react-toastify'
 
-type TToastType = 'info' | 'success' | 'warning' | 'error' | 'default';
+type TToastType = 'info' | 'success' | 'warning' | 'error' | 'default'
 
 type TUseToastProps = {
-  type: TToastType;
-  title: string;
-  description?: string;
-};
+  type: TToastType
+  title: string
+  description?: string
+}
 
-type TToastBodyProps = Required<Pick<TUseToastProps, 'title' | 'description'>>;
+type TToastBodyProps = Required<Pick<TUseToastProps, 'title' | 'description'>>
 
 const toastDefaultStyle: ToastOptions = {
   position: 'bottom-center',
@@ -19,7 +19,7 @@ const toastDefaultStyle: ToastOptions = {
   draggable: false,
   progress: undefined,
   theme: 'dark',
-};
+}
 
 const ToastBody = ({ title, description }: TToastBodyProps) => {
   return (
@@ -27,8 +27,8 @@ const ToastBody = ({ title, description }: TToastBodyProps) => {
       <div className="font-semibold">{title}</div>
       <div>{description}</div>
     </div>
-  );
-};
+  )
+}
 
 export const useToast = () => ({
   showToast: ({ type, title, description }: TUseToastProps) => {
@@ -37,32 +37,32 @@ export const useToast = () => ({
         toast.info(
           description ? <ToastBody title={title} description={description} /> : title,
           toastDefaultStyle
-        );
-        break;
+        )
+        break
       case 'success':
         toast.success(
           description ? <ToastBody title={title} description={description} /> : title,
           toastDefaultStyle
-        );
-        break;
+        )
+        break
       case 'warning':
         toast.warning(
           description ? <ToastBody title={title} description={description} /> : title,
           toastDefaultStyle
-        );
-        break;
+        )
+        break
       case 'error':
         toast.error(
           description ? <ToastBody title={title} description={description} /> : title,
           toastDefaultStyle
-        );
-        break;
+        )
+        break
       default:
         toast(
           description ? <ToastBody title={title} description={description} /> : title,
           toastDefaultStyle
-        );
-        break;
+        )
+        break
     }
   },
-});
+})

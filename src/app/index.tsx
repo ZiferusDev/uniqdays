@@ -1,2 +1,2 @@
-export { App } from './ui';
-export { Providers } from './providers';
+export { App } from './ui'
+export { Providers } from './providers'

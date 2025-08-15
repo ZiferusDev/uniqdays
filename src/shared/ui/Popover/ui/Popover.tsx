@@ -1,5 +1,6 @@
-import { useState, useRef, useEffect } from 'react';
-import { positionClasses, type TPopoverProps } from '../model';
+import { useState, useRef, useEffect, useCallback } from 'react'
+
+import { positionClasses, type TPopoverProps } from '../model'
 
 export const Popover: React.FC<TPopoverProps> = ({
   children,
@@ -9,27 +10,30 @@ export const Popover: React.FC<TPopoverProps> = ({
   setOpened,
 }) => {
   // Контролируемый или неконтролируемый режим
-  const [isOpenInternal, setIsOpenInternal] = useState(false);
-  const isControlled = typeof opened === 'boolean' && typeof setOpened === 'function';
-  const isOpen = isControlled ? opened : isOpenInternal;
+  const [isOpenInternal, setIsOpenInternal] = useState(false)
+  const isControlled = typeof opened === 'boolean' && typeof setOpened === 'function'
+  const isOpen = isControlled ? opened : isOpenInternal
 
-  const triggerRef = useRef<HTMLDivElement>(null);
-  const popoverRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLDivElement>(null)
+  const popoverRef = useRef<HTMLDivElement>(null)
 
   // Функция смены состояния открытия
-  const changeOpenState = (nextState: boolean) => {
-    if (isControlled) {
-      setOpened(nextState);
-    } else {
-      setIsOpenInternal(nextState);
-    }
-  };
+  const changeOpenState = useCallback(
+    (nextState: boolean) => {
+      if (isControlled) {
+        setOpened(nextState)
+      } else {
+        setIsOpenInternal(nextState)
+      }
+    },
+    [isControlled, setOpened]
+  )
 
-  const onTogglePopover = () => changeOpenState(!isOpen);
+  const onTogglePopover = () => changeOpenState(!isOpen)
 
   // Закрытие по клику вне поповера и триггера
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen) return
 
     function handleDocumentClick(event: MouseEvent) {
       if (
@@ -38,17 +42,17 @@ export const Popover: React.FC<TPopoverProps> = ({
         triggerRef.current &&
         !triggerRef.current.contains(event.target as Node)
       ) {
-        changeOpenState(false);
+        changeOpenState(false)
       }
     }
 
-    document.addEventListener('mousedown', handleDocumentClick);
+    document.addEventListener('mousedown', handleDocumentClick)
     return () => {
-      document.removeEventListener('mousedown', handleDocumentClick);
-    };
-  }, [isOpen]);
+      document.removeEventListener('mousedown', handleDocumentClick)
+    }
+  }, [changeOpenState, isOpen])
 
-  const popoverPositionClass = positionClasses[position];
+  const popoverPositionClass = positionClasses[position]
 
   return (
     <div className="inline-block relative" ref={triggerRef}>
@@ -67,5 +71,5 @@ export const Popover: React.FC<TPopoverProps> = ({
         </div>
       )}
     </div>
-  );
-};
+  )
+}

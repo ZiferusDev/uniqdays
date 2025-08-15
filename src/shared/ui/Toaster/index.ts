@@ -1,1 +1,1 @@
-export { useToast } from './lib';
+export { useToast } from './lib'

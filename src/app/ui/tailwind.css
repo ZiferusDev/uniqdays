@@ -3,3 +3,4 @@
 @import 'tailwindcss/theme';
 @import 'tailwindcss/preflight';
 @import 'tailwindcss/utilities';
+@plugin 'tailgrids/plugin';

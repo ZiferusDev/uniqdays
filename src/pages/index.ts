@@ -1,2 +1,2 @@
-export { AuthPage } from './Auth';
-export { Dashboard } from './Dashboard';
+export { AuthPage } from './Auth'
+export { Dashboard } from './Dashboard'

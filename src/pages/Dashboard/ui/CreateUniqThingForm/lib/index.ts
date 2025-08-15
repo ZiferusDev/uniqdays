@@ -2,6 +2,6 @@ export {
   safeFormDataStringValue,
   safeFormDataCheckboxValue,
   safeFormDataDateValue,
-} from './transformers';
+} from './transformers'
 
-export { useCreateUniqThingForm } from './useCreateUniqThingForm';
+export { useCreateUniqThingForm } from './useCreateUniqThingForm'

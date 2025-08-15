@@ -1,1 +1,1 @@
-export { UniqThingCard } from './ui';
+export { UniqThingCard } from './ui'

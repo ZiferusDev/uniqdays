@@ -1,1 +1,1 @@
-export { TodoCard } from './TodoCard';
+export { TodoCard } from './TodoCard'

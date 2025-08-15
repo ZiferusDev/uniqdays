@@ -1,2 +1,2 @@
-export type { TTooltipPosition, TTooltipProps } from './types';
-export { positionClasses } from './constants';
+export type { TTooltipPosition, TTooltipProps } from './types'
+export { positionClasses } from './constants'

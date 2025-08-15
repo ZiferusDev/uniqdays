@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react'
 
 export const TodoCard = ({ children }: { children: ReactNode }) => {
   return (
@@ -6,5 +6,5 @@ export const TodoCard = ({ children }: { children: ReactNode }) => {
       <div>Вот это да, карточка</div>
       {children}
     </div>
-  );
-};
+  )
+}

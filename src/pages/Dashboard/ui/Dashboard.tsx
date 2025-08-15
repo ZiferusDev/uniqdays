@@ -1,10 +1,11 @@
-import { useGetTasksQuery } from '@entities/Todo';
-import { LogoutBttn } from '@features';
-import { CreateUniqThingForm } from './CreateUniqThingForm';
-import { UniqThingCard } from './UniqThingCard';
+import { useGetTasksQuery } from '@entities/Todo'
+import { LogoutBttn } from '@features'
+
+import { CreateUniqThingForm } from './CreateUniqThingForm'
+import { UniqThingCard } from './UniqThingCard'
 
 export const Dashboard = () => {
-  const { data } = useGetTasksQuery();
+  const { data } = useGetTasksQuery()
   // console.log(data[0].dateOfCompleting);
   return (
     <div className="m-10 flex flex-col gap-1">
@@ -26,5 +27,5 @@ export const Dashboard = () => {
           : null}
       </ul>
     </div>
-  );
-};
+  )
+}

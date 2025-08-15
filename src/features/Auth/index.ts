@@ -1,1 +1,1 @@
-export { LogoutBttn, SignInWithGoogleBttn } from './ui';
+export { LogoutBttn, SignInWithGoogleBttn } from './ui'

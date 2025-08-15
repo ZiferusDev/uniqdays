@@ -1,7 +1,9 @@
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import { App, Providers } from '@app';
-import { BrowserRouter } from 'react-router-dom';
+import { StrictMode } from 'react'
+
+import { createRoot } from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom'
+
+import { App, Providers } from '@app'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -11,4 +13,4 @@ createRoot(document.getElementById('root')!).render(
       </Providers>
     </BrowserRouter>
   </StrictMode>
-);
+)

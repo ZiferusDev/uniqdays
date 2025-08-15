@@ -1,1 +1,1 @@
-export { LogoutBttn, SignInWithGoogleBttn } from './Auth';
+export { LogoutBttn, SignInWithGoogleBttn } from './Auth'

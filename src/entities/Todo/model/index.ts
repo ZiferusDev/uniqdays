@@ -1,1 +1,1 @@
-export type { TTask } from './types';
+export type { TTask } from './types'
