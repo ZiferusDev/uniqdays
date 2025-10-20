@@ -90,7 +90,7 @@ export const useCreateUniqThingForm = () => {
 
   useEffect(() => {
     if (isError) {
-      console.warn(error.message)
+      console.warn('Ошибка при создании действия', error.message)
       const isUniqueError = error.message?.match('not unique')
       showToast({
         type: 'error',

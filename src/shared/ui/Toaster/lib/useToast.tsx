@@ -1,14 +1,9 @@
+import { useCallback } from 'react'
+
 import { toast, type ToastOptions } from 'react-toastify'
 
-type TToastType = 'info' | 'success' | 'warning' | 'error' | 'default'
-
-type TUseToastProps = {
-  type: TToastType
-  title: string
-  description?: string
-}
-
-type TToastBodyProps = Required<Pick<TUseToastProps, 'title' | 'description'>>
+import type { TUseToastProps } from '../model'
+import { ToastBody } from '../ui'
 
 const toastDefaultStyle: ToastOptions = {
   position: 'bottom-center',
@@ -21,17 +16,8 @@ const toastDefaultStyle: ToastOptions = {
   theme: 'dark',
 }
 
-const ToastBody = ({ title, description }: TToastBodyProps) => {
-  return (
-    <div className="flex flex-col">
-      <div className="font-semibold">{title}</div>
-      <div>{description}</div>
-    </div>
-  )
-}
-
-export const useToast = () => ({
-  showToast: ({ type, title, description }: TUseToastProps) => {
+export const useToast = () => {
+  const showToast = useCallback(({ type, title, description }: TUseToastProps) => {
     switch (type) {
       case 'info':
         toast.info(
@@ -64,5 +50,8 @@ export const useToast = () => ({
         )
         break
     }
-  },
-})
+  }, [])
+  return {
+    showToast,
+  }
+}
