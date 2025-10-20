@@ -1,4 +1,4 @@
-import { DatePicker, Input, Button } from '@shared'
+import { DatePicker, Input, Button, Checkbox } from '@shared'
 
 import { useCreateUniqThingForm } from '../lib'
 import { HelpingPanel } from './HelpingPanel'
@@ -29,55 +29,43 @@ export const CreateUniqThingForm = () => {
       <form
         ref={formRef}
         onSubmit={onSubmit}
-        className="max-w-70 flex flex-col items-center justify-center bg-indigo-100 rounded-2xl p-8 gap-2"
+        className="max-w-70 flex flex-col items-start justify-center bg-default-bg-gray rounded-2xl px-5 pb-5 pt-4 gap-5"
       >
-        <h3 className="font-bold">Создать уникальное действие</h3>
-        <Input
-          id="title"
-          name="title"
-          type="text"
-          labelText="Название"
-          placeholder="Название действия"
-          stretched
-          required
-        />
-        <Input
-          id="description"
-          name="description"
-          labelText="Описание"
-          placeholder="Описание действия"
-          stretched
-        />
-        <Input
-          labelText="Год по дефолту"
-          value={yearByDefault}
-          onChange={onChangeYearByDefault}
-          type="number"
-          stretched
-        />
-        <DatePicker
-          id="dateOfCompleting"
-          name="dateOfCompleting"
-          labelText="Дата завершения"
-          certainYear={yearByDefault || undefined}
-          value={dateOfCompleting}
-          onChange={onChangeDateOfCompleting}
-          stretched
-        />
-        <label className="flex gap-1 select-none cursor-pointer items-center justify-center">
-          <input
-            id="isDone"
-            checked={isThingDone}
-            onChange={toggleIsThingDone}
-            className="cursor-pointer"
-            defaultChecked={isThingDoneByDefault}
-            name="isDone"
-            type="checkbox"
+        <h3 className="font-bold text-xl">Создать новое уникальное действие</h3>
+        <div id="inputGroup" className="flex flex-col gap-3">
+          <Input id="title" name="title" type="text" placeholder="Название" stretched required />
+          <Input id="description" name="description" placeholder="Описание" stretched />
+          <Input
+            id="yearByDefault"
+            name="yearByDefault"
+            value={yearByDefault}
+            onChange={onChangeYearByDefault}
+            type="number"
+            label="!временное"
+            placeholder="Год по дефолту"
+            stretched
           />
-          <span>Завершена</span>
-        </label>
-        <Button type="submit" isLoading={isLoading}>
-          Отправить
+          <DatePicker
+            id="dateOfCompleting"
+            name="dateOfCompleting"
+            placeholder="Дата"
+            certainYear={yearByDefault || undefined}
+            value={dateOfCompleting}
+            onChange={onChangeDateOfCompleting}
+            stretched
+          />
+        </div>
+        <Checkbox
+          id="isDone"
+          checked={isThingDone}
+          onChange={toggleIsThingDone}
+          className="cursor-pointer"
+          defaultChecked={isThingDoneByDefault}
+          name="isDone"
+          label="Завершённое событие"
+        />
+        <Button type="submit" isLoading={isLoading} stretched>
+          Создать
         </Button>
       </form>
     </div>

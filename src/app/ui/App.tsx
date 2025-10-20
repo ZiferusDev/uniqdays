@@ -5,7 +5,7 @@ import './tailwind.css'
 
 export const App = () => {
   return (
-    <>
+    <div>
       <AppRouter />
       <ToastContainer
         position="bottom-center"
@@ -18,6 +18,6 @@ export const App = () => {
         pauseOnHover
         theme="dark"
       />
-    </>
+    </div>
   )
 }

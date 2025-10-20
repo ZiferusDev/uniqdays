@@ -1,1 +1,11 @@
-export { Spinner, Tooltip, Popover, useToast, Input, DatePicker, Button, LoadingScreen } from './ui'
+export {
+  Spinner,
+  Tooltip,
+  Popover,
+  useToast,
+  Input,
+  DatePicker,
+  Button,
+  LoadingScreen,
+  Checkbox,
+} from './ui'

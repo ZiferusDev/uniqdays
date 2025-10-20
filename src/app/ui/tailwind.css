@@ -4,3 +4,18 @@
 @import 'tailwindcss/preflight';
 @import 'tailwindcss/utilities';
 @plugin 'tailgrids/plugin';
+
+@theme {
+  /* Global */
+  --color-default-bg-gray: #f3f4f6;
+  --color-border-gray: #dfe4ea;
+
+  /* Button */
+  --color-button-primary: #3056d3;
+  --color-button-primary-hover: #1b44c8;
+  --color-button-primary-active: #1b44c8;
+  --color-button-disabled-bg: #e5e7eb;
+  --color-button-disabled-border: #e5e7eb;
+  --color-button-disabled-text: #6b7280;
+  --color-button-text: #ffffff;
+}
