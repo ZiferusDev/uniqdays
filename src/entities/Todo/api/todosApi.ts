@@ -7,6 +7,7 @@ import {
   doc,
   query,
   where,
+  orderBy,
 } from 'firebase/firestore'
 
 import { createApi } from '@reduxjs/toolkit/query/react'
@@ -26,7 +27,7 @@ export const todosApi = createApi({
     getTasks: build.query<TTask[], void>({
       queryFn: async () => {
         try {
-          const data = await getDocs(tasksCollectionRef)
+          const data = await getDocs(query(tasksCollectionRef, orderBy('timestamp', 'desc')))
           const tasksData = data.docs.map((doc) => ({ ...(doc.data() as TTask), id: doc.id }))
           return { data: tasksData }
         } catch (error) {
