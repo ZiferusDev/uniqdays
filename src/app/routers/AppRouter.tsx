@@ -3,7 +3,8 @@ import { Suspense } from 'react'
 import type { RouteProps } from 'react-router-dom'
 import { Route, Routes } from 'react-router-dom'
 
-import { AuthPage, Dashboard } from '@pages'
+import { AuthPage } from '~/pages/Auth'
+import { Dashboard } from '~/pages/Dashboard'
 
 import { SafeRoute } from './SafeRoute'
 

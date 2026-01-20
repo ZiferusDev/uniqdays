@@ -7,7 +7,8 @@
 - Стили: Tailwind
 - Сборщик: vite
 - Архитектура: FSD
-- Улучшение кода: Prettier, Eslint, Stylelint, Sonarlint, Eslint/fsd-plugin
+- Улучшение кода: Prettier, Eslint, Stylelint, Sonarlint, Eslint/fsd-plugin, steiger, Agent-skills/React best practices
+- CI: husky
 
 > ### author: Ziferus
 >

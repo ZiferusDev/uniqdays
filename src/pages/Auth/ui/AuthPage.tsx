@@ -3,10 +3,9 @@ import { useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom'
 
 import { onAuthStateChanged } from 'firebase/auth'
-
-import { SignInWithGoogleBttn, LogoutBttn } from '@features'
-import { LoadingScreen } from '@shared'
-import { auth } from '@shared/api'
+import { SignInWithGoogleBttn, LogoutBttn } from '~/features/Auth'
+import { auth } from '~/shared/api'
+import { LoadingScreen } from '~/shared/ui'
 
 export const AuthPage = () => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | 'loading'>('loading')
@@ -21,6 +20,7 @@ export const AuthPage = () => {
         setIsAuthenticated(false)
       }
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [auth])
 
   if (isAuthenticated === 'loading') {

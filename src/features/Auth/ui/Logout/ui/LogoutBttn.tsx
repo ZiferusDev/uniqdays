@@ -1,8 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 
 import { signOut } from 'firebase/auth'
-
-import { auth } from '@shared/api'
+import { auth } from '~/shared/api'
 
 export const LogoutBttn = () => {
   const navigate = useNavigate()

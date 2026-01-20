@@ -1,4 +1,4 @@
-import { DatePicker, Input, Button, Checkbox } from '@shared'
+import { DatePicker, Input, Button, Checkbox } from '~/shared/ui'
 
 import { useCreateUniqThingForm } from '../lib'
 import { HelpingPanel } from './HelpingPanel'

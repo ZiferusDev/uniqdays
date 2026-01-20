@@ -1,6 +1,6 @@
 import { ToastContainer } from 'react-toastify'
 
-import { AppRouter } from '../routers/AppRouter'
+import { AppRouter } from './routers/AppRouter'
 import './tailwind.css'
 
 export const App = () => {

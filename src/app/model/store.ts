@@ -1,4 +1,5 @@
-import { todosApi } from '@entities/Todo'
+import { todosApi } from '~/entities/Todo'
+
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 
 const rootReducer = combineReducers({

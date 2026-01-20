@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
-import { useDeleteTaskByIdMutation } from '@entities'
-import { Popover, Tooltip, useToast } from '@shared'
+import { useDeleteTaskByIdMutation } from '~/entities/Todo'
+import { useToast, Popover, Tooltip } from '~/shared/ui'
 
 import { TagBlock } from './TagBlock'
 

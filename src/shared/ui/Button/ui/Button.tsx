@@ -1,4 +1,4 @@
-import { Spinner } from '@shared/ui/Spinner'
+import { Spinner } from '~/shared/ui'
 
 type TButtonProps = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'className'> & {
   isLoading?: boolean

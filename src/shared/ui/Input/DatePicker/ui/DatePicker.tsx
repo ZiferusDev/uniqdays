@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 
-import { IconCalendar } from '@shared/ui/Icons'
+import { IconCalendar } from '~/shared/ui/Icons'
 
 import type { IInputProps } from '../../ui'
 import { Input } from '../../ui'

@@ -9,9 +9,9 @@ import {
   where,
   orderBy,
 } from 'firebase/firestore'
+import { baseQuery, db } from '~/shared/api'
 
 import { createApi } from '@reduxjs/toolkit/query/react'
-import { db, baseQuery } from '@shared/api'
 
 import type { TTask } from '../model'
 

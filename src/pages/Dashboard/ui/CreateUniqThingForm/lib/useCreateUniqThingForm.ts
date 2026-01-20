@@ -1,8 +1,8 @@
 import type { FormEvent, ChangeEvent } from 'react'
 import { useState, useRef, useEffect, useCallback } from 'react'
 
-import { useAddTaskMutation } from '@entities'
-import { useToast } from '@shared'
+import { useAddTaskMutation } from '~/entities/Todo'
+import { useToast } from '~/shared/ui'
 
 import {
   safeFormDataDateValue,

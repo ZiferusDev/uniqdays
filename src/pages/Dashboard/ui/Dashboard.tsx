@@ -1,5 +1,5 @@
-import { useGetTasksQuery } from '@entities/Todo'
-import { LogoutBttn } from '@features'
+import { useGetTasksQuery } from '~/entities/Todo'
+import { LogoutBttn } from '~/features/Auth'
 
 import { CreateUniqThingForm } from './CreateUniqThingForm'
 import { UniqThingCard } from './UniqThingCard'
