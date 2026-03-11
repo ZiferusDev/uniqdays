@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, useCallback } from 'react'
 import { useAddTaskMutation } from '~/entities/Todo'
 import { useToast } from '~/shared/ui'
 
+import { useGlobalSearch } from '../../GlobalSearchContext'
 import {
   safeFormDataDateValue,
   safeFormDataStringValue,
@@ -16,8 +17,10 @@ export const useCreateUniqThingForm = () => {
   const [isThingDone, setIsThingDone] = useState(isThingDoneByDefault)
   const [dateOfCompleting, setDateOfCompleting] = useState<string>('')
   const [yearByDefault, setYearByDefault] = useState<number | ''>()
+  const [titleInputValue, setTitleInputValue] = useState('')
 
   const formRef = useRef<HTMLFormElement>(null)
+  const { setTitleInputValue: setContextTitleValue } = useGlobalSearch()
 
   const { showToast } = useToast()
 
@@ -46,7 +49,7 @@ export const useCreateUniqThingForm = () => {
 
     const taskTitle = formData.get('title')
 
-    if (typeof taskTitle === 'string') {
+    if (typeof taskTitle === 'string' && taskTitle.trim()) {
       await addTask({
         id: 'auto',
         title: taskTitle,
@@ -75,11 +78,16 @@ export const useCreateUniqThingForm = () => {
       }
 
       setDateOfCompleting('')
+      setTitleInputValue('')
     }
   }, [isThingDoneByDefault])
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     onCreateUniqThing(e)
+  }
+
+  const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setTitleInputValue(e.target.value)
   }
 
   useEffect(() => {
@@ -106,6 +114,10 @@ export const useCreateUniqThingForm = () => {
     }
   }, [error, isError, isSuccess, onResetForm, showToast])
 
+  useEffect(() => {
+    setContextTitleValue(titleInputValue)
+  }, [titleInputValue, setContextTitleValue])
+
   return {
     formRef,
     isLoading,
@@ -121,5 +133,7 @@ export const useCreateUniqThingForm = () => {
     onResetForm,
     yearByDefault,
     onChangeYearByDefault,
+    titleInputValue,
+    handleTitleChange,
   }
 }

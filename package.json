@@ -17,6 +17,7 @@
     "@tailwindcss/vite": "^4.1.5",
     "firebase": "^11.6.1",
     "husky": "^9.1.7",
+    "lodash": "^4.17.23",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-redux": "^9.2.0",

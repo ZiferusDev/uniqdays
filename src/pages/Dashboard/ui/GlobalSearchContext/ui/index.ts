@@ -1,0 +1,1 @@
+export { GlobalSearchProvider } from './GlobalSearchProvider'

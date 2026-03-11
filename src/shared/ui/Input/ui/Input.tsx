@@ -50,7 +50,8 @@ export const Input = ({
 
   const stretchedClass = stretched ? 'w-full' : ''
   return (
-    <div id={id} className={stretchedClass}>
+    // className вставляется и сюда, и в input хм-хм
+    <div id={id} className={`${stretchedClass} ${className}`}>
       {label && (
         <label
           className={`mb-2.5 block text-base font-medium text-dark dark:text-white ${stretchedClass}`}

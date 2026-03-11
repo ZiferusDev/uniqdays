@@ -1,3 +1,4 @@
+// components/CreateUniqThingForm.tsx
 import { DatePicker, Input, Button, Checkbox } from '~/shared/ui'
 
 import { useCreateUniqThingForm } from '../lib'
@@ -17,6 +18,8 @@ export const CreateUniqThingForm = () => {
     onChangeYearByDefault,
     dateOfCompleting,
     onChangeDateOfCompleting,
+    titleInputValue,
+    handleTitleChange,
   } = useCreateUniqThingForm()
 
   return (
@@ -34,7 +37,16 @@ export const CreateUniqThingForm = () => {
         >
           <h3 className="font-bold text-xl">Создать новое уникальное действие</h3>
           <div id="inputGroup" className="flex flex-col gap-3">
-            <Input id="title" name="title" type="text" placeholder="Название" stretched required />
+            <Input
+              id="title"
+              name="title"
+              type="text"
+              placeholder="Название"
+              value={titleInputValue}
+              onChange={handleTitleChange}
+              stretched
+              required
+            />
             <Input id="description" name="description" placeholder="Описание" stretched />
             <Input
               id="yearByDefault"
