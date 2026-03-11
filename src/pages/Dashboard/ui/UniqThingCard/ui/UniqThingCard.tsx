@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import { useDeleteTaskByIdMutation } from '~/entities/Todo'
-import { useToast, Popover, Tooltip } from '~/shared/ui'
+import { useToast, Popover, SpoilerByTooltip } from '~/shared/ui'
 
 import { TagBlock } from './TagBlock'
 
@@ -52,7 +52,7 @@ export const UniqThingCard = ({
   }, [isSuccess, isError, name, showToast])
 
   return (
-    <div className="flex flex-col border-2 border-gray-300 rounded-2xl p-5 w-2xs relative">
+    <div className="flex flex-col border-2 border-gray-300 rounded-2xl p-5 w-100 relative">
       <div className="absolute top-3 right-3 z-10">
         <Popover
           opened={isDeleteThingPopoverOpened}
@@ -87,9 +87,7 @@ export const UniqThingCard = ({
         </Popover>
       </div>
       <div className="flex-1 min-w-0 pr-8">
-        <Tooltip text={name}>
-          <div className="font-bold truncate italic">{name}</div>
-        </Tooltip>
+        <SpoilerByTooltip text={name} className="font-bold truncate italic" />
       </div>
       {isDone ? (
         <>

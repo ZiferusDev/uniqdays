@@ -1,0 +1,1 @@
+export { SpoilerByTooltip } from './ui'
